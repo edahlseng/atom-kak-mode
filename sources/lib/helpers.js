@@ -1,7 +1,9 @@
-'use babel'
+/* @flow */
+"use babel";
+/* global atom */
 
-export const times = length => Array.from({ length }).map((v, i) => i)
+export const times = length => Array.from({ length }).map((v, i) => i);
 
 export const showError = (message, options = {}) => {
-  atom.notifications.addError(`kak-mode: ${message}`, options)
-}
+	atom.notifications.addError(`kak-mode: ${message}`, options);
+};

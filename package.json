@@ -14,7 +14,13 @@
     "docs:dev-serve": "cd docs && reload -b",
     "docs:dev": "concurrently npm:docs:dev-*",
     "link": "cd sources && { [[ -e package.json ]] || ln -s ../package.json; } && { [[ -e node_modules ]] || ln -s ../node_modules; } && apm link",
-    "format": "prettier-standard"
+    "lint": "npm run lint:commit -- --from master; npm run lint:json; npm run lint:js",
+    "lint:commit": "commitlint",
+    "lint-report:commit": "mkdir -p ./linting-results/commitlint && commitlint --format commitlint-format-junit > ./linting-results/commitlint/report.xml",
+    "lint:json": "prettier --config .prettierrc.js --list-different '**/*.json'",
+    "lint-report:json": "mkdir -p ./linting-results/prettier-json && prettier-junit --config .prettierrc.js '**/*.json' > ./linting-results/prettier-json/report.xml",
+    "lint:js": "eslint ./",
+    "lint-report:js": "eslint ./ --output-file ./linting-results/eslint/report.xml --format junit"
   },
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
@@ -32,8 +38,7 @@
     "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.2.1",
-    "@commitlint/config-conventional": "^7.1.2",
+    "@eric.dahlseng/configuration-lint": "^0.4.2",
     "@semantic-release/apm": "^1.0.0",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
@@ -42,18 +47,8 @@
     "concurrently": "^4.1.0",
     "cz-conventional-changelog": "^2.1.0",
     "documentation": "^9.0.0",
-    "eslint": "^5.10.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "husky": "^1.2.1",
-    "lint-staged": "^8.1.0",
     "markdown-it": "^8.4.2",
     "nodemon": "^1.18.9",
-    "prettier": "^1.15.3",
-    "prettier-standard": "^8.0.1",
     "pug": "^2.0.3",
     "reload": "^2.4.0",
     "semantic-release": "^15.13.0"
@@ -61,18 +56,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
     }
   }
 }

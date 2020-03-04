@@ -1,12 +1,17 @@
-'use babel'
+/* @flow */
+"use babel";
 
 const updateEditorClass = ({ state, editor }) => {
-  if (!editor) return
-  editor.element.classList.remove('kak-mode-normal')
-  editor.element.classList.remove('kak-mode-insert')
+	if (!editor) return;
+	editor.element.classList.remove("kak-mode-normal");
+	editor.element.classList.remove("kak-mode-insert");
 
-  if (state.mode.name === 'NORMAL') { editor.element.classList.add('kak-mode-normal') }
-  if (state.mode.name === 'INSERT') { editor.element.classList.add('kak-mode-insert') }
-}
+	if (state.mode.name === "NORMAL") {
+		editor.element.classList.add("kak-mode-normal");
+	}
+	if (state.mode.name === "INSERT") {
+		editor.element.classList.add("kak-mode-insert");
+	}
+};
 
-export default updateEditorClass
+export default updateEditorClass;

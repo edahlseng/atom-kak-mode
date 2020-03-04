@@ -1,28 +1,31 @@
-'use babel'
+/* @flow */
+"use babel";
 
-import { MODES } from '../lib/consts'
-import { simulateKeySequence, initWorkspace } from './helpers'
+/* global beforeEach, describe, expect, it*/
 
-describe('status bar', () => {
-  let workspaceElement, mainModule
+import { MODES } from "../lib/consts";
+import { simulateKeySequence, initWorkspace } from "./helpers";
 
-  beforeEach(async () => {
-    ;({ workspaceElement, mainModule } = await initWorkspace())
-  })
+describe("status bar", () => {
+	let workspaceElement, mainModule;
 
-  describe('status bar', () => {
-    it('displays mode and handles mode update', () => {
-      const getStatusIndicator = () =>
-        workspaceElement.querySelector('kak-mode-status')
-      expect(getStatusIndicator().innerText.trim()).toBe(
-        MODES.NORMAL.inStatusBar
-      )
-      expect(mainModule.state.mode).toEqual(MODES.NORMAL)
-      simulateKeySequence('i')
-      expect(getStatusIndicator().innerText.trim()).toBe(
-        MODES.INSERT.inStatusBar
-      )
-      expect(mainModule.state.mode).toEqual(MODES.INSERT)
-    })
-  })
-})
+	beforeEach(async () => {
+		({ workspaceElement, mainModule } = await initWorkspace());
+	});
+
+	describe("status bar", () => {
+		it("displays mode and handles mode update", () => {
+			const getStatusIndicator = () =>
+				workspaceElement.querySelector("kak-mode-status");
+			expect(getStatusIndicator().innerText.trim()).toBe(
+				MODES.NORMAL.inStatusBar,
+			);
+			expect(mainModule.state.mode).toEqual(MODES.NORMAL);
+			simulateKeySequence("i");
+			expect(getStatusIndicator().innerText.trim()).toBe(
+				MODES.INSERT.inStatusBar,
+			);
+			expect(mainModule.state.mode).toEqual(MODES.INSERT);
+		});
+	});
+});

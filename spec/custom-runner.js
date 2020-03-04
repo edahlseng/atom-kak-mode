@@ -1,8 +1,11 @@
-const { createRunner } = require('atom-jasmine3-test-runner')
+/* @flow */
+/* global module, require */
+
+const { createRunner } = require("atom-jasmine3-test-runner");
 
 module.exports = createRunner({
-  showEditor: true,
-  specHelper: {
-    attachToDom: true,
-  },
-})
+	showEditor: true,
+	specHelper: {
+		attachToDom: true,
+	},
+});
