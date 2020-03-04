@@ -1,10 +1,10 @@
 {
-  "name": "kak-mode",
+  "name": "kak-mode-plus",
   "main": "./lib/kak-mode",
   "version": "1.9.0",
   "description": "Kakoune emulator",
   "keywords": [],
-  "repository": "https://github.com/adekbadek/atom-kak-mode",
+  "repository": "https://github.com/edahlseng/atom-kak-mode-plus",
   "license": "MIT",
   "scripts": {
     "cm": "git-cz",
