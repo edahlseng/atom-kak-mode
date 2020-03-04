@@ -154,6 +154,10 @@ export default {
 		const getKeyHandler = (key, modifier) => ({
 			hiddenInCommandPalette: true,
 			didDispatch: e => {
+				if (e.currentTarget.nodeName !== "ATOM-TEXT-EDITOR") return;
+
+				const editor = e.currentTarget.getModel();
+
 				const {
 					mode,
 					isGoToActive,
@@ -161,7 +165,6 @@ export default {
 					searchPattern,
 					count,
 				} = this.state;
-				const editor = atom.workspace.getActiveTextEditor();
 
 				const escapePressed = key === "escape";
 				const enterPressed = key === "enter";
